@@ -5,7 +5,7 @@ pipeline {
     DOMAIN='http://quiz.cloudwebapplication.ga/'
     STACK='EC2ContainerService-helloworld'
     DOCKER_REGISTRY='https://nivedhasugumaran/phpcert:latest.registry'
-    CONTAINER='vendor/app'
+    CONTAINER='phpcert'
     VERSION="1.${BUILD_NUMBER}"
   }
   stages {
