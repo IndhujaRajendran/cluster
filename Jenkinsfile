@@ -21,17 +21,18 @@ pipeline {
         }
       }
     }**/
-    stage('Build Image') {
-      steps {
-        script {
-            docker.withRegistry("${DOCKER_REGISTRY}") {
-                def img = docker.build("${CONTAINER}:${VERSION}")
-                img.push()
-                sh "docker rmi ${img.id}"
-            }
-        }
-      }
-    }
+    stage('Deploy'){
+	   steps{	      
+	       script{
+          sh 'docker build . -t dockername/docker123:$Docker_tag'
+          withCredentials([string(credentialsId: 'dockerpass', variable: 'dockerpass')]) {
+                sh '''docker login -u Nivedhasugumaran -p adminpass123
+                docker push nivedhasugumaran/docker123:$latest
+                 '''
+                }
+			    }      
+			      }
+
     stage('Deploy Stack') {
       steps {
           withCredentials([
