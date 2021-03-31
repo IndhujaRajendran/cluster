@@ -4,7 +4,7 @@ pipeline {
     PROJECT_NAME='myproject'
     DOMAIN='http://quiz.cloudwebapplication.ga/'
     STACK='EC2ContainerService-helloworld'
-    DOCKER_REGISTRY='https://nivedhasugumaran/phpcert.registry'
+    DOCKER_REGISTRY='https://nivedhasugumaran/phpcert:latest.registry'
     CONTAINER='vendor/app'
     VERSION="1.${BUILD_NUMBER}"
   }
