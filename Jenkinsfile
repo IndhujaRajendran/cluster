@@ -9,7 +9,7 @@ pipeline {
     VERSION="1.${BUILD_NUMBER}"
   }
   stages {
-    stage('Tag Git Commit') {
+    /**stage('Tag Git Commit') {
       steps {
         sshagent (['jenkins']) {
             script {
@@ -20,7 +20,7 @@ pipeline {
             }
         }
       }
-    }
+    }**/
     stage('Build Image') {
       steps {
         script {
