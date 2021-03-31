@@ -3,9 +3,9 @@ pipeline {
   environment {
     PROJECT_NAME='myproject'
     DOMAIN='http://quiz.cloudwebapplication.ga/'
-    STACK=’EC2ContainerService-helloworld'
+    STACK='EC2ContainerService-helloworld'
     DOCKER_REGISTRY=’https://nivedhasugumaran/phpcert.registry'
-    CONTAINER=’vendor/app'
+    CONTAINER='vendor/app'
     VERSION="1.${BUILD_NUMBER}"
   }
   stages {
