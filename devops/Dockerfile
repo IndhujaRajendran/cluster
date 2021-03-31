@@ -2,20 +2,20 @@
 FROM node as builder
 
 # set working directory
-RUN mkdir /usr/src/app
-WORKDIR /usr/src/app
+RUN mkdir /usr/devops
+WORKDIR /usr/devops
 
 # install and cache app dependencies
-COPY package.json /usr/src/app/package.json
+COPY package.json /usr/devops/package.json
 RUN npm install --silent
 
 
-COPY . /usr/src/app
+COPY . /usr/devops/app
 
 RUN npm run build
 
 # production environment
 FROM nginx
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+COPY --from=builder /usr/devops/build /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
