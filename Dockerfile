@@ -6,7 +6,7 @@ RUN mkdir /usr/devops
 WORKDIR /usr/devops
 
 # install and cache app dependencies
-COPY package.json /usr/devops/package.json
+COPY devops/usr/www/html
 RUN npm install --silent
 
 
