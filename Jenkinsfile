@@ -24,7 +24,7 @@ pipeline {
     stage('Build Image') {
       steps {
         script {
-            docker.withRegistry("${DOCKER_REGISTRY}", 'docker-registry-credentials') {
+            docker.withRegistry("${DOCKER_REGISTRY}") {
                 def img = docker.build("${CONTAINER}:${VERSION}")
                 img.push()
                 sh "docker rmi ${img.id}"
