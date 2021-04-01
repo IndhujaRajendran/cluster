@@ -4,20 +4,20 @@
   "Parameters": {
     "KeyPair": {
       "Description": "Name of an existing EC2 KeyPair to enable SSH access to the container instances",
-      "Type": "AWS::EC2::KeyPair::KeyName",
+      "Type": "AWS::EC2::KeyPair::cluster",
       "ConstraintDescription": "Must be a valid EC2 keypair."
     },
     "LoadBalancerSubnets": {
       "Description": "Subnet(s) for the load balancer",
-      "Type": "List<AWS::EC2::Subnet::Id>"
+      "Type": "subnet-e13b3089"
     },
     "ECSSubnets": {
       "Description": "Subnets for the ECS container instances",
-      "Type": "List<AWS::EC2::Subnet::Id>"
+      "Type": "subnet-e13b3089
     },
     "VpcId": {
       "Description": "VPC ID for resources",
-      "Type": "AWS::EC2::VPC::Id"
+      "Type": "vpc-820ceee9"
     },
     "InstanceType": {
       "Description": "Container instances EC2 instance type",
@@ -78,24 +78,14 @@
       "ConstraintDescription": "must be a valid EC2 instance type."
     },
     "DesiredCapacity": {
-      "Type": "Number",
+      "Type": "1",
       "Default": 1,
       "Description": "Number of instances to launch in your ECS cluster."
     },
     "MaxSize": {
-      "Type": "Number",
+      "Type": "1",
       "Description": "Maximum number of instances that can be launched in your ECS cluster."
     },
-    "Owner": {
-      "Description": "Used to tag resources",
-      "Type": "String"
-    },
-    "SourceCidr": {
-      "Description": "Restrict SSH access to the container instances to this CIDR",
-      "Type": "String",
-      "Default": "0.0.0.0/0"
-    }
-  },
   "Mappings": {
     "AWSRegionToAMI": {
       "us-east-1": {
@@ -153,73 +143,26 @@
         "DesiredCapacity": {
           "Ref": "DesiredCapacity"
         },
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "Container Instance",
-            "PropagateAtLaunch": "true"
-          },
-          {
-            "Key": "Owner",
-            "Value": {
-              "Ref": "Owner"
-            },
-            "PropagateAtLaunch": "true"
-          }
-        ]
-      },
-      "CreationPolicy": {
-        "ResourceSignal": {
-          "Timeout": "PT15M"
-        }
-      },
-      "UpdatePolicy": {
-        "AutoScalingRollingUpdate": {
-          "MinInstancesInService": {
-            "Ref": "DesiredCapacity"
-          },
-          "MaxBatchSize": 1,
-          "PauseTime": "PT15M",
-          "WaitOnResourceSignals": true
-        }
-      }
-    },
     "ContainerInstancesSecurityGroup": {
       "Type": "AWS::EC2::SecurityGroup",
       "Properties": {
         "VpcId": {
-          "Ref": "VpcId"
+          "Ref": "vpc-820ceee9"
         },
         "GroupDescription": "Enable HTTP from the ApplicationLoadBalancer on dynamic ports",
         "SecurityGroupIngress": [
           {
             "IpProtocol": "tcp",
-            "FromPort": 32768,
-            "ToPort": 60999,
+            "FromPort": 8080,
+            "ToPort": 8081,
             "SourceSecurityGroupId": {
               "Ref": "LoadBalancerSecurityGroup"
             }
           },
-          {
-            "IpProtocol": "tcp",
-            "FromPort": 22,
-            "ToPort": 22,
-            "CidrIp": {
-              "Ref": "SourceCidr"
-            }
-          }
+          
         ],
-        "Tags": [
-          {
-            "Key": "Name",
-            "Value": "ecs-access-container-instance-from-loadbalancer"
-          },
-          {
-            "Key": "Owner",
-            "Value": {
-              "Ref": "Owner"
-            }
-          }
+        
+          
         ]
       }
     },
@@ -314,7 +257,7 @@
           "Fn::FindInMap": [
             "AWSRegionToAMI",
             {
-              "Ref": "AWS::Region"
+              "Ref": "ap-south-1"
             },
             "AMIID"
           ]
