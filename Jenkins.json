@@ -1,15 +1,15 @@
-{  
+{
     "family": "trialquiz",
     "taskRoleArn": "",
     "executionRoleArn": "",
-    "networkMode": "Bridge",
+    "networkMode": "bridge",
     "containerDefinitions": [
         {
             "name": "quiz123",
             "image": "758181067640.dkr.ecr.ap-south-1.amazonaws.com/quizrepo:latest",
             "repositoryCredentials": {"credentialsParameter": ""},
-            "cpu": 1,
-            "memory": 128,
+            "cpu": 0,
+            "memory": 0,
             "memoryReservation": 0,
             "links": [""],
             "portMappings": [
@@ -145,50 +145,22 @@
             }
         }
     ],
-    "volumes": [
-        {
-            "name": "",
-            "host": {"sourcePath": ""},
-            "dockerVolumeConfiguration": {
-                "scope": "task",
-                "autoprovision": true,
-                "driver": "",
-                "driverOpts": {"KeyName": ""},
-                "labels": {"KeyName": ""}
-            },
-            "efsVolumeConfiguration": {
-                "fileSystemId": "",
-                "rootDirectory": "",
-                "transitEncryption": "ENABLED",
-                "transitEncryptionPort": 0,
-                "authorizationConfig": {
-                    "accessPointId": "",
-                    "iam": "ENABLED"
-                }
-            },
-      
-    ],
+
     "placementConstraints": [
         {
             "type": "memberOf",
             "expression": ""
         }
     ],
-    "requiresCompatibilities": "EC2",
-    "cpu": "",
-    "memory": "",
-    
-    "pidMode": "task",
-    "ipcMode": "none",
-    "proxyConfiguration": {
-        "type": "APPMESH",
-        "containerName": "",
-        
-    },
-    "inferenceAccelerators": [
+    "requiresCompatibilities": ["EC2"],
+    "cpu": "128",
+    "memory": "256",
+    "tags": [
         {
-            "deviceName": "",
-            "deviceType": ""
+            "key": "name",
+            "value": "quiz"
         }
     ]
+    
+ 
 }
